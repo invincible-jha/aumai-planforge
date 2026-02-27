@@ -6,7 +6,7 @@ dependencies, dependency analysis, and execution state tracking.
 
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import Enum
 from typing import Literal
 
@@ -87,7 +87,7 @@ class Plan(BaseModel):
     status: Literal["draft", "validated", "active", "running", "completed", "failed"] = "draft"
     estimated_cost: float = Field(default=0.0, ge=0.0)
     estimated_duration_seconds: float = Field(default=0.0, ge=0.0)
-    created_at: datetime = Field(default_factory=datetime.utcnow)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(tz=timezone.utc))
     metadata: dict[str, object] = Field(default_factory=dict)
 
 

@@ -13,7 +13,7 @@ from __future__ import annotations
 import time
 import uuid
 from collections import Counter, defaultdict, deque
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any
 
 from aumai_planforge.models import (
@@ -55,7 +55,7 @@ class PlanBuilder:
             plan_id=str(uuid.uuid4()),
             name=name,
             goal=goal,
-            created_at=datetime.utcnow(),
+            created_at=datetime.now(tz=timezone.utc),
         )
 
     def add_step(
